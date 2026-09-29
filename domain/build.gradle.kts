@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "shahzod.projects.presentation"
+    namespace = "shahzod.projects.domain"
     compileSdk {
         version = release(37)
     }
@@ -19,26 +19,26 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
 }
 
 dependencies {
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.ui)
-    implementation(libs.androidx.compose.ui.graphics)
-    implementation(libs.androidx.compose.ui.tooling.preview)
+    implementation(libs.androidx.appcompat)
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
 
+    implementation(project(":core"))
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
+
     //dagger hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
-    implementation(project(":app"))
-    implementation(project(":core"))
-    implementation(project(":domain"))
 }

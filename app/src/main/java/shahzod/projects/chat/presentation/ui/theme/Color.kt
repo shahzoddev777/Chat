@@ -1,4 +1,4 @@
-package shahzod.projects.chat.ui.theme
+package shahzod.projects.chat.presentation.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
