@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "shahzod.projects.data"
+    namespace = "shahzod.projects.domain"
     compileSdk {
         version = release(37)
     }
@@ -30,15 +30,15 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(libs.androidx.junit)
 
-    //dagger hilt
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.compiler)
+    implementation(project(":core"))
 
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
 
-    implementation(project(":domain"))
-    implementation(project(":core"))
+    //dagger hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+
 }

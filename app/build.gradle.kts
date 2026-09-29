@@ -58,4 +58,21 @@ dependencies {
     //dagger hilt
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
+
+    // Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
+
+    //core
+    implementation(project(":core"))
+    implementation(project(":data"))
+    implementation(project(":domain"))
+
+    //navigation
+    implementation(libs.voyager.navigator)
+    implementation(libs.voyager.screenmodel)
+    implementation(libs.voyager.transitions)
+    implementation(libs.voyager.tab.navigator)
+    implementation(libs.androidx.compose.material.icons.extended)
 }
