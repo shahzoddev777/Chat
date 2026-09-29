@@ -1,4 +1,4 @@
-package shahzod.projects.chat.presentation.util.navigation
+package shahzod.projects.presentation.util.navigation
 
 import androidx.lifecycle.MutableLiveData
 
@@ -10,7 +10,7 @@ object AppNavigationDispatcher : AppNavigator, AppNavigationHandler {
         backStack.postValue(param)
     }
 
-    override fun navigateTo(screen:Screen) = navigat {
+    override fun navigateTo(screen: Screen) = navigat {
         push(screen)
     }
 
@@ -18,12 +18,11 @@ object AppNavigationDispatcher : AppNavigator, AppNavigationHandler {
         pop()
     }
 
-    override fun replace(screen:Screen) = navigat {
+    override fun replace(screen: Screen) = navigat {
         replace(screen)
     }
 
-    override fun replaceAll(screen:Screen) = navigat {
+    override fun replaceAll(screen: Screen) = navigat {
         replaceAll(screen)
     }
 }
-

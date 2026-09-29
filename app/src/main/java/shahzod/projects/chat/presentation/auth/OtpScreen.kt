@@ -198,7 +198,6 @@ fun OtpAuthScreen(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Confirm / Verify Button
         Button(
             onClick = { viewModel.onIntent(OtpAuthContract.Intent.OnVerifyClick) },
             modifier = Modifier
@@ -226,7 +225,6 @@ fun OtpAuthScreen(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        // Keypad
         val keypadRows = listOf(
             listOf("1", "2", "3"),
             listOf("4", "5", "6"),

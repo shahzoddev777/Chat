@@ -38,7 +38,8 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
-    implementation(project(":app"))
+    implementation(libs.voyager.navigator)
+
     implementation(project(":core"))
     implementation(project(":domain"))
 }

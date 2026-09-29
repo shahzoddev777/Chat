@@ -59,7 +59,7 @@ fun PhoneAuthScreen(
         viewModel.sideEffect.collectLatest { effect ->
             when (effect) {
                 is PhoneAuthContract.SideEffect.NavigateToOtp -> {
-                    onNavigateToOtp(effect.phoneNumber)
+                    onNavigateToOtp(effect.phone)
                 }
                 is PhoneAuthContract.SideEffect.ShowToast -> {
                     Toast.makeText(context, effect.message, Toast.LENGTH_SHORT).show()
@@ -77,7 +77,6 @@ fun PhoneAuthScreen(
             .background(Color(0xFFF3F3FA))
             .padding(16.dp)
     ) {
-        // Orqaga qaytish tugmasi
         IconButton(
             onClick = { viewModel.onIntent(PhoneAuthContract.Intent.OnBackClick) },
             modifier = Modifier.padding(top = 8.dp)
@@ -91,7 +90,6 @@ fun PhoneAuthScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Sarlavha
         Text(
             text = "Telefon raqamingiz",
             fontSize = 24.sp,
@@ -101,7 +99,6 @@ fun PhoneAuthScreen(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Subtitr
         Text(
             text = "Ushbu raqamga tasdiqlash kodi yuboriladi",
             fontSize = 14.sp,
@@ -151,7 +148,6 @@ fun PhoneAuthScreen(
 
             Spacer(modifier = Modifier.width(12.dp))
 
-            // ViewModel dan kelayotgan raqam
             val formattedNumber = formatPhoneNumber(uiState.phoneNumber)
             Text(
                 text = if (formattedNumber.isEmpty()) "90 123 45 67" else formattedNumber,
@@ -160,7 +156,6 @@ fun PhoneAuthScreen(
             )
         }
 
-        // Xatolik xabari chiqsa ko'rsatish uchun
         if (!uiState.errorMessage.isNullOrEmpty()) {
             Spacer(modifier = Modifier.height(8.dp))
             Text(
@@ -172,7 +167,6 @@ fun PhoneAuthScreen(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Kod yuborish tugmasi
         Button(
             onClick = { viewModel.onIntent(PhoneAuthContract.Intent.OnSendCodeClick) },
             modifier = Modifier
@@ -195,7 +189,6 @@ fun PhoneAuthScreen(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        // Keypad (Raqamlar paneli)
         val keypadRows = listOf(
             listOf("1", "2", "3"),
             listOf("4", "5", "6"),
