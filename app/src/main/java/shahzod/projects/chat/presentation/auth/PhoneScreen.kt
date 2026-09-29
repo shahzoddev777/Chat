@@ -79,7 +79,7 @@ fun PhoneAuthScreen(
     ) {
 
 
-        Spacer(modifier = Modifier.height(16.dp).padding(top = 8.dp))
+        Spacer(modifier = Modifier.padding(top = 24.dp))
 
         Text(
             text = "Telefon raqamingiz",
@@ -123,11 +123,6 @@ fun PhoneAuthScreen(
                 color = Color(0xFF1A1B4B)
             )
 
-            Icon(
-                imageVector = Icons.Default.ArrowDropDown,
-                contentDescription = null,
-                tint = Color(0xFF5E6380)
-            )
 
             Box(
                 modifier = Modifier
@@ -141,7 +136,7 @@ fun PhoneAuthScreen(
 
             val formattedNumber = formatPhoneNumber(uiState.phoneNumber)
             Text(
-                text = if (formattedNumber.isEmpty()) "90 123 45 67" else formattedNumber,
+                text = if (formattedNumber.isEmpty()) "90 000 00 06" else formattedNumber,
                 fontSize = 16.sp,
                 color = if (uiState.phoneNumber.isEmpty()) Color(0xFF9E9FA8) else Color(0xFF1A1B4B)
             )
