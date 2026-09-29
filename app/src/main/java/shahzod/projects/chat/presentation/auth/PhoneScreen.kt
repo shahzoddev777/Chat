@@ -77,18 +77,9 @@ fun PhoneAuthScreen(
             .background(Color(0xFFF3F3FA))
             .padding(16.dp)
     ) {
-        IconButton(
-            onClick = { viewModel.onIntent(PhoneAuthContract.Intent.OnBackClick) },
-            modifier = Modifier.padding(top = 8.dp)
-        ) {
-            Icon(
-                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                contentDescription = "Orqaga",
-                tint = Color(0xFF1A1B4B)
-            )
-        }
 
-        Spacer(modifier = Modifier.height(16.dp))
+
+        Spacer(modifier = Modifier.height(16.dp).padding(top = 8.dp))
 
         Text(
             text = "Telefon raqamingiz",
