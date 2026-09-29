@@ -53,7 +53,7 @@ class OtpAuthViewModel @Inject constructor(
 
     private fun startTimer() {
         timerJob?.cancel()
-        _uiState.update { it.copy(timerSeconds = 45, isResendEnabled = false) }
+        _uiState.update { it.copy(timerSeconds = 300, isResendEnabled = false) }
         timerJob = viewModelScope.launch {
             while (_uiState.value.timerSeconds > 0) {
                 delay(1000)
@@ -64,7 +64,8 @@ class OtpAuthViewModel @Inject constructor(
     }
 
     private fun handleKeyClick(digit: String) {
-        if (_uiState.value.code.length < 5) {
+        val state = _uiState.value
+        if (state.code.length < state.codeLength) {
             _uiState.update { it.copy(code = it.code + digit, errorMessage = null) }
         }
     }

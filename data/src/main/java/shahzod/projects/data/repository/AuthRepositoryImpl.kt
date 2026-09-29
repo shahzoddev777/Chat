@@ -30,8 +30,13 @@ class AuthRepositoryImpl @Inject constructor(
     ): Flow<Result<VerifyTokenResponse>> = flow {
         emit(
             runCatching {
-                authApi.getVerifyToken(request).body()
-                    ?: throw Exception("Response body is null")
+                val response = authApi.getVerifyToken(request)
+                if (response.isSuccessful) {
+                    response.body() ?: throw Exception("Server bo'sh javob qaytardi")
+                } else {
+                    val errorText = response.errorBody()?.string()
+                    throw Exception("Xatolik ${response.code()}: $errorText")
+                }
             }
         )
     }

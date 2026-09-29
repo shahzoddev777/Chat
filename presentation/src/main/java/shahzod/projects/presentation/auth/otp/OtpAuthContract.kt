@@ -4,12 +4,18 @@ sealed interface OtpAuthContract {
     data class UiState(
         val phone: String = "",
         val code: String = "",
-        val timerSeconds: Int = 45,
+        val timerSeconds: Int = 300,
         val isResendEnabled: Boolean = false,
         val isLoading: Boolean = false,
         val errorMessage: String? = null
     ) : OtpAuthContract {
-        val isCodeFilled: Boolean get() = code.length == 5
+        val codeLength: Int
+            get() {
+                val national = phone.removePrefix("+998").toLongOrNull()
+                return if (national != null && national in 900000000L..900000999L) 5 else 6
+            }
+
+        val isCodeFilled: Boolean get() = code.length == codeLength
         val formattedTimer: String
             get() {
                 val minutes = timerSeconds / 60

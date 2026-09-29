@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -128,26 +127,27 @@ fun OtpAuthScreen(
 
         Spacer(modifier = Modifier.height(24.dp))
 
+        // Katakchalar soni telefon raqamga qarab 5 yoki 6 (uiState.codeLength); weight(1f) bilan ekranga moslashadi
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally)
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            for (i in 0 until 5) {
+            for (i in 0 until uiState.codeLength) {
                 val char = uiState.code.getOrNull(i)?.toString() ?: ""
                 val isFocused = uiState.code.length == i
 
                 Box(
                     modifier = Modifier
-                        .width(52.dp)
+                        .weight(1f)
                         .height(58.dp)
-                        .clip(RoundedCornerShape(16.dp))
+                        .clip(RoundedCornerShape(14.dp))
                         .background(Color.White)
                         .border(
                             border = BorderStroke(
                                 width = if (isFocused) 1.5.dp else 1.dp,
                                 color = if (isFocused) Color(0xFF00A884) else Color(0xFFE0E0EF)
                             ),
-                            shape = RoundedCornerShape(16.dp)
+                            shape = RoundedCornerShape(14.dp)
                         ),
                     contentAlignment = Alignment.Center
                 ) {
