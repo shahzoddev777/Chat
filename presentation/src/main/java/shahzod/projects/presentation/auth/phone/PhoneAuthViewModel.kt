@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import shahzod.projects.presentation.util.navigation.AppNavigator
+import shahzod.projects.chat.presentation.util.navigation.AppNavigator
 import shahzod.projects.core.request.VerifyNumberRequest
 import shahzod.projects.domain.usecase.AuthUseCase
 import javax.inject.Inject
