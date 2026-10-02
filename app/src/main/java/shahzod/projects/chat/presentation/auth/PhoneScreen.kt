@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -42,6 +41,9 @@ class PhoneScreen : Screen {
             viewModel = viewModel,
             onNavigateToOtp = { phoneNumber ->
                 navigator.push(OtpScreen(phoneNumber))
+            },
+            onNavigateBack = {
+                navigator.pop()
             }
         )
     }
@@ -50,7 +52,8 @@ class PhoneScreen : Screen {
 @Composable
 fun PhoneAuthScreen(
     viewModel: PhoneAuthViewModel,
-    onNavigateToOtp: (String) -> Unit
+    onNavigateToOtp: (String) -> Unit,
+    onNavigateBack: () -> Unit
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
@@ -65,7 +68,7 @@ fun PhoneAuthScreen(
                     Toast.makeText(context, effect.message, Toast.LENGTH_SHORT).show()
                 }
                 PhoneAuthContract.SideEffect.NavigateBack -> {
-                    // Orqaga qaytish amali
+                    onNavigateBack()
                 }
             }
         }
@@ -77,9 +80,18 @@ fun PhoneAuthScreen(
             .background(Color(0xFFF3F3FA))
             .padding(16.dp)
     ) {
+        IconButton(
+            onClick = { viewModel.onIntent(PhoneAuthContract.Intent.OnBackClick) },
+            modifier = Modifier.padding(top = 8.dp)
+        ) {
+            Icon(
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                contentDescription = "Orqaga",
+                tint = Color(0xFF1A1B4B)
+            )
+        }
 
-
-        Spacer(modifier = Modifier.padding(top = 24.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         Text(
             text = "Telefon raqamingiz",
@@ -122,7 +134,6 @@ fun PhoneAuthScreen(
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFF1A1B4B)
             )
-
 
             Box(
                 modifier = Modifier

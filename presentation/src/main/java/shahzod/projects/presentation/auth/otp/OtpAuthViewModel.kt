@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import shahzod.projects.presentation.util.navigation.AppNavigator
 import shahzod.projects.core.local.LocalDataStorage
 import shahzod.projects.core.request.VerifyNumberRequest
 import shahzod.projects.core.request.VerifyTokenRequest
@@ -24,8 +23,7 @@ import javax.inject.Inject
 class OtpAuthViewModel @Inject constructor(
     private val verifyOtpUseCase: AuthUseCase.VerifyOtp,
     private val requestOtpUseCase: AuthUseCase.RequestOtp,
-    private val localStorage: LocalDataStorage,
-    private val navigator: AppNavigator
+    private val localStorage: LocalDataStorage
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(OtpAuthContract.UiState())
@@ -53,7 +51,7 @@ class OtpAuthViewModel @Inject constructor(
 
     private fun startTimer() {
         timerJob?.cancel()
-        _uiState.update { it.copy(timerSeconds = 300, isResendEnabled = false) }
+        _uiState.update { it.copy(timerSeconds = 45, isResendEnabled = false) }
         timerJob = viewModelScope.launch {
             while (_uiState.value.timerSeconds > 0) {
                 delay(1000)
@@ -64,8 +62,7 @@ class OtpAuthViewModel @Inject constructor(
     }
 
     private fun handleKeyClick(digit: String) {
-        val state = _uiState.value
-        if (state.code.length < state.codeLength) {
+        if (_uiState.value.code.length < 6) {
             _uiState.update { it.copy(code = it.code + digit, errorMessage = null) }
         }
     }
@@ -125,6 +122,5 @@ class OtpAuthViewModel @Inject constructor(
         viewModelScope.launch {
             _sideEffect.send(OtpAuthContract.SideEffect.NavigateBack)
         }
-        navigator.back()
     }
 }

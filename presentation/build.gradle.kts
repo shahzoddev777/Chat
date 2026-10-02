@@ -42,4 +42,8 @@ dependencies {
 
     implementation(project(":core"))
     implementation(project(":domain"))
+
+    //mvi
+    implementation(libs.orbit.viewmodel)
+    implementation(libs.orbit.compose)
 }

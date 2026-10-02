@@ -13,4 +13,8 @@ class LocalDataStorage @Inject constructor(@ApplicationContext context: Context)
     var refreshToken: String by Strings("")
     var isSigned: Boolean by Booleans(false)
     var language : String by Strings("uz")
+
+    companion object {
+        const val NO_BIRTHDAY = Long.MIN_VALUE
+    }
 }

@@ -76,4 +76,8 @@ dependencies {
     implementation(libs.voyager.transitions)
     implementation(libs.voyager.tab.navigator)
     implementation(libs.androidx.compose.material.icons.extended)
+
+    //mvi
+    implementation(libs.orbit.viewmodel)
+    implementation(libs.orbit.compose)
 }

@@ -12,9 +12,10 @@ import cafe.adriel.voyager.navigator.Navigator
 import dagger.hilt.android.AndroidEntryPoint
 import shahzod.projects.chat.presentation.auth.PhoneScreen
 import shahzod.projects.chat.presentation.home.HomeScreen
+import shahzod.projects.chat.presentation.tab.MainScreen
 import shahzod.projects.chat.presentation.ui.theme.ChatTheme
 import shahzod.projects.core.local.LocalDataStorage
-import shahzod.projects.presentation.util.navigation.AppNavigationHandler
+import shahzod.projects.chat.presentation.util.navigation.AppNavigationHandler
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -28,7 +29,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        val startScreen = if (localStorage.isSigned) HomeScreen() else PhoneScreen()
+        val startScreen = if (localStorage.isSigned) MainScreen() else PhoneScreen()
         setContent {
             ChatTheme {
                 Navigator(startScreen) { navigator ->

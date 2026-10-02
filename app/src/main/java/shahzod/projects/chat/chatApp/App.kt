@@ -1,4 +1,4 @@
-package shahzod.projects.chat
+package shahzod.projects.chat.chatApp
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

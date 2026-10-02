@@ -10,15 +10,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import shahzod.projects.chat.presentation.util.navigation.AppNavigator
 import shahzod.projects.core.request.VerifyNumberRequest
 import shahzod.projects.domain.usecase.AuthUseCase
+import shahzod.projects.presentation.auth.otp.OtpAuthContract
 import javax.inject.Inject
 
 @HiltViewModel
 class PhoneAuthViewModel @Inject constructor(
-    private val requestOtpUseCase: AuthUseCase.RequestOtp,
-    private val navigator: AppNavigator
+    private val requestOtpUseCase: AuthUseCase.RequestOtp
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(PhoneAuthContract.UiState())
@@ -68,7 +67,6 @@ class PhoneAuthViewModel @Inject constructor(
                 }.onFailure { error ->
                     val message = error.message ?: "Kodni yuborishda xatolik yuz berdi"
                     _uiState.update { it.copy(errorMessage = message) }
-                    _sideEffect.send(PhoneAuthContract.SideEffect.ShowToast(message))
                 }
             }
         }
@@ -78,6 +76,5 @@ class PhoneAuthViewModel @Inject constructor(
         viewModelScope.launch {
             _sideEffect.send(PhoneAuthContract.SideEffect.NavigateBack)
         }
-        navigator.back()
     }
 }

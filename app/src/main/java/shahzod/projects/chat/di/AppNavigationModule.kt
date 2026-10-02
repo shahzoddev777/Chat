@@ -1,16 +1,16 @@
-package shahzod.projects.presentation.di
+package shahzod.projects.chat.di
 
-import shahzod.projects.presentation.util.navigation.AppNavigationDispatcher
-import shahzod.projects.presentation.util.navigation.AppNavigationHandler
-import shahzod.projects.presentation.util.navigation.AppNavigator
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import shahzod.projects.chat.presentation.util.navigation.AppNavigationDispatcher
+import shahzod.projects.chat.presentation.util.navigation.AppNavigationHandler
+import shahzod.projects.chat.presentation.util.navigation.AppNavigator
 import javax.inject.Singleton
 
-@InstallIn(SingletonComponent::class)
 @Module
+@InstallIn(SingletonComponent::class)
 class AppNavigationModule {
 
     @Provides

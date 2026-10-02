@@ -43,9 +43,11 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import kotlinx.coroutines.flow.collectLatest
 import shahzod.projects.chat.R
-import shahzod.projects.chat.presentation.home.HomeScreen
+import shahzod.projects.chat.presentation.tab.MainScreen
 import shahzod.projects.presentation.auth.otp.OtpAuthContract
 import shahzod.projects.presentation.auth.otp.OtpAuthViewModel
+
+private const val OTP_LENGTH = 6
 
 data class OtpScreen(val phone: String) : Screen {
 
@@ -61,7 +63,10 @@ data class OtpScreen(val phone: String) : Screen {
         OtpAuthScreen(
             viewModel = viewModel,
             onNavigateToHome = {
-                navigator.replaceAll(HomeScreen())
+                navigator.replaceAll(MainScreen())
+            },
+            onNavigateBack = {
+                navigator.pop()
             }
         )
     }
@@ -70,7 +75,8 @@ data class OtpScreen(val phone: String) : Screen {
 @Composable
 fun OtpAuthScreen(
     viewModel: OtpAuthViewModel,
-    onNavigateToHome: () -> Unit = {}
+    onNavigateToHome: () -> Unit = {},
+    onNavigateBack: () -> Unit = {}
 ) {
     val uiState by viewModel.uiState.collectAsState()
     val context = LocalContext.current
@@ -85,7 +91,7 @@ fun OtpAuthScreen(
                     Toast.makeText(context, effect.message, Toast.LENGTH_SHORT).show()
                 }
                 OtpAuthContract.SideEffect.NavigateBack -> {
-
+                    onNavigateBack()
                 }
             }
         }
@@ -127,12 +133,11 @@ fun OtpAuthScreen(
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Katakchalar soni telefon raqamga qarab 5 yoki 6 (uiState.codeLength); weight(1f) bilan ekranga moslashadi
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            for (i in 0 until uiState.codeLength) {
+            for (i in 0 until OTP_LENGTH) {
                 val char = uiState.code.getOrNull(i)?.toString() ?: ""
                 val isFocused = uiState.code.length == i
 
